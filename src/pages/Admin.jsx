@@ -1,10 +1,13 @@
 import { Container } from 'react-bootstrap';
 
-export default function Admin() {
+
+function Admin() {
     return (
         <Container className="mt-4">
-            <h2>Panel de Administración</h2>
-            <p>Acceso exclusivo para usuarios autenticados.</p>
+            <h2>Admin Panel</h2>
+            <p>Exclusive access for authenticated users.</p>
         </Container>
     );
-}
+};
+
+export default Admin;

@@ -1,13 +1,16 @@
 import { useParams } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
-export default function Profile() {
+
+function Profile() {
   const { id } = useParams();
 
   return (
     <Container className="mt-4">
-      <h2>Perfil del Usuario</h2>
-      <p>Bienvenido, {id}</p>
+      <h2>User Profile</h2>
+      <p>Welcome, {id}</p>
     </Container>
   );
-}
+};
+
+export default Profile;

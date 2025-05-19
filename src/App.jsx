@@ -1,12 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-// import Menu from "./components/Menu";
 import ProtectedRoute from './components/ProtectedRoute';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Products from "./pages/Products";
-import Offer from "./pages/Offer";
+import Offer from "./pages/Offers";
 import Profile from "./pages/Profile";
 import Admin from "./pages/Admin";
 

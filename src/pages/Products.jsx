@@ -1,6 +1,7 @@
 import { Container, ListGroup } from 'react-bootstrap';
 
-export default function Products() {
+
+function Products() {
     return (
         <Container className="mt-4">
             <h2>Productos Disponibles</h2>
@@ -11,4 +12,6 @@ export default function Products() {
             </ListGroup>
         </Container>
     );
-}
+};
+
+export default Products;

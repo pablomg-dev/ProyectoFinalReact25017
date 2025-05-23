@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from "./components/Header";
+import Home from "./components/Home";
 import Footer from "./components/Footer";
+import Electronics from "./components/Electronics";
+import Jewelry from "./components/Jewelry";
 import ProtectedRoute from './components/ProtectedRoute';
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Products from "./pages/Products";
-import Offer from "./pages/Offers";
-import Profile from "./pages/Profile";
-import Admin from "./pages/Admin";
+import Login from "./components/Login";
+import Profile from "./components/Profile";
+import Admin from "./components/Admin";
 
 
 
@@ -19,8 +19,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/offer" element={<Offer />} />
+          <Route path="/electronics" element={<Electronics />} />
+          <Route path="/jewelry" element={<Jewelry />} />
 
           <Route path="/profile/:id" element={
             <ProtectedRoute>

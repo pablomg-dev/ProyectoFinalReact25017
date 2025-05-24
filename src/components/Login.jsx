@@ -1,28 +1,52 @@
 import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button } from 'react-bootstrap';
-
+import { useState } from 'react';
 
 function Login() {
     const navigate = useNavigate();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
-    const handleLogin = () => {
-        localStorage.setItem('auth', 'true');
-        navigate('/perfil/usuario123');
+    const handleLogin = (e) => {
+        e.preventDefault();
+
+        if (username === 'admin' && password === 'admin123') {
+            localStorage.setItem('auth', 'true');
+            navigate('/admin');
+        } else {
+            alert('Credenciales incorrectas. Intenta con "admin" y "admin123"');
+            setUsername('');
+            setPassword('');
+        }
     };
 
     return (
-        <Container className="mt-5" style={{ maxWidth: 400 }}>
-            <h2>Login</h2>
-            <Form>
+        // Agregamos clases de flexbox al Container para centrarlo
+        <Container
+            className="mt-5 d-flex flex-column justify-content-center align-items-center"
+            style={{ maxWidth: 400, minHeight: '80vh' }} // minHeight es opcional pero ayuda visualmente
+        >
+            <h2 className="mb-4">Login</h2> {/* mb-4 para dar espacio al título */}
+            <Form onSubmit={handleLogin} className="w-100"> {/* w-100 para que el formulario ocupe el ancho máximo del Container */}
                 <Form.Group className="mb-3">
                     <Form.Label>User</Form.Label>
-                    <Form.Control type="text" />
+                    <Form.Control
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
                 </Form.Group>
                 <Form.Group className="mb-3">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" />
+                    <Form.Control
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
                 </Form.Group>
-                <Button variant="primary" onClick={handleLogin}>Enter</Button>
+                <Button variant="primary" type="submit" className="w-100"> {/* w-100 para que el botón ocupe todo el ancho */}
+                    Enter
+                </Button>
             </Form>
         </Container>
     );

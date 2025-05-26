@@ -30,7 +30,7 @@ Para ejecutar este proyecto localmente:
 
 1.  Clona el repositorio:
     ```bash
-    git clone https://github.com/pablomg-dev/ProyectoFinalReact25017.git
+    git clone [https://github.com/pablomg-dev/ProyectoFinalReact25017.git](https://github.com/pablomg-dev/ProyectoFinalReact25017.git)
     ```
 2.  Navega al directorio del proyecto:
     ```bash
@@ -47,3 +47,12 @@ Para ejecutar este proyecto localmente:
     # o yarn dev
     ```
     La aplicación se abrirá en tu navegador en `http://localhost:5173` (o un puerto similar).
+
+---
+
+## Credenciales de Acceso
+
+Para iniciar sesión como usuario, utiliza las siguientes credenciales:
+
+* **Usuario**: `admin`
+* **Contraseña**: `admin123`

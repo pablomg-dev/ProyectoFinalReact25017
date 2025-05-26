@@ -1,6 +1,7 @@
 import { Container, Row, Col, Card, Image } from 'react-bootstrap';
 import { useCart } from './CartContext';
 
+
 const Cart = () => {
     const { cartItems } = useCart();
 

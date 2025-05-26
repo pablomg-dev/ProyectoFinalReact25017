@@ -1,14 +1,14 @@
 // src/components/Home.jsx
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Spinner, Alert } from 'react-bootstrap';
-import ProductCard from './ProductCard'; // Asegúrate de importar ProductCard
+import ProductCard from './ProductCard';
 
 function Home() {
     const [allProducts, setAllProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Obtener el estado de autenticación del localStorage (o de tu fuente de verdad)
+    // Obtener el estado de autenticación del localStorage
     const isAuth = localStorage.getItem('auth') === 'true';
 
     useEffect(() => {
@@ -59,8 +59,7 @@ function Home() {
             {!loading && !error && (
                 <Row xs={1} md={2} lg={3} className="g-4">
                     {allProducts.map(product => (
-                        <Col key={product.id} className="d-flex"> {/* d-flex para que la tarjeta se estire */}
-                            {/* Renderiza el ProductCard y le pasa el producto y el estado de autenticación */}
+                        <Col key={product.id} className="d-flex">
                             <ProductCard product={product} isAuth={isAuth} />
                         </Col>
                     ))}

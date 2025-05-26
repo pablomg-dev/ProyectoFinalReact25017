@@ -56,19 +56,19 @@ const Header = () => {
                                 >
                                     Logout
                                 </Button>
-
-                                <Nav.Link
-                                    as={Link}
-                                    to="/cart"
-                                    onClick={handleNavLinkClick}
-                                    className="my-2 my-md-0 d-inline-flex justify-content-center align-items-center"
-                                >
-                                    <CartFill size={25} />
-                                </Nav.Link>
                             </>
                         ) : (
                             <Nav.Link as={Link} to="/login" onClick={handleNavLinkClick} className="me-md-2 my-2 my-md-0 d-inline-flex justify-content-center align-items-center fs-5">Login</Nav.Link>
                         )}
+
+                        <Nav.Link
+                            as={Link}
+                            to="/cart"
+                            onClick={handleNavLinkClick}
+                            className="my-2 my-md-0 d-inline-flex justify-content-center align-items-center"
+                        >
+                            <CartFill size={25} />
+                        </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -2,11 +2,13 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
 
+// Se crea el componente Login
 function Login() {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    // Se crea la función handleLogin que se ejecuta al enviar el formulario
     const handleLogin = (e) => {
         e.preventDefault();
 
@@ -24,10 +26,10 @@ function Login() {
         // Agregamos clases de flexbox al Container para centrarlo
         <Container
             className="mt-5 d-flex flex-column justify-content-center align-items-center"
-            style={{ maxWidth: 400, minHeight: '80vh' }} // minHeight es opcional pero ayuda visualmente
+            style={{ maxWidth: 400, minHeight: '80vh' }}
         >
-            <h2 className="mb-4">Login</h2> {/* mb-4 para dar espacio al título */}
-            <Form onSubmit={handleLogin} className="w-100"> {/* w-100 para que el formulario ocupe el ancho máximo del Container */}
+            <h2 className="mb-4">Login</h2>
+            <Form onSubmit={handleLogin} className="w-100">
                 <Form.Group className="mb-3">
                     <Form.Label>User</Form.Label>
                     <Form.Control
@@ -44,7 +46,7 @@ function Login() {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </Form.Group>
-                <Button variant="primary" type="submit" className="w-100"> {/* w-100 para que el botón ocupe todo el ancho */}
+                <Button variant="primary" type="submit" className="w-100">
                     Enter
                 </Button>
             </Form>

@@ -1,12 +1,49 @@
-# React + Vite
+# Proyecto tienda online para el curso de React de Talento Tech BA
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este es un proyecto de comercio electrónico desarrollado con **React**. Permite a los usuarios explorar una variedad de productos, **agregarlos al carrito de compras** y **eliminarlos**, ofreciendo una experiencia de compra sencilla e intuitiva.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Características
 
-## Expanding the ESLint configuration
+* Catálogo de productos interactivo, impulsado por **FakeStoreAPI**.
+* Funcionalidad de agregar productos al carrito.
+* Funcionalidad de eliminar productos del carrito.
+* Vista clara del carrito de compras.
+* Diseño responsivo, utilizando componentes de **Bootstrap React** e iconos de **React-Bootstrap Icons**.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Tecnologías Utilizadas
+
+* **React**: Biblioteca de JavaScript para construir interfaces de usuario.
+* **Vite**: Herramienta de construcción rápida para el desarrollo frontend.
+* **FakeStoreAPI**: API REST simulada para obtener datos de productos.
+* **Bootstrap React**: Componentes de Bootstrap reconstruidos para React.
+* **React-Bootstrap Icons**: Colección de iconos para usar con React y Bootstrap.
+
+---
+
+## Cómo Empezar
+
+Para ejecutar este proyecto localmente:
+
+1.  Clona el repositorio:
+    ```bash
+    git clone [https://github.com/pablomg-dev/ProyectoFinalReact25017.git]
+    ```
+2.  Navega al directorio del proyecto:
+    ```bash
+    cd nombre-de-tu-proyecto
+    ```
+3.  Instala las dependencias:
+    ```bash
+    npm install
+    # o yarn install
+    ```
+4.  Inicia la aplicación en modo desarrollo:
+    ```bash
+    npm run dev
+    # o yarn dev
+    ```
+    La aplicación se abrirá en tu navegador en `http://localhost:5173` (o un puerto similar).

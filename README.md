@@ -30,8 +30,7 @@ Para ejecutar este proyecto localmente:
 
 1.  Clona el repositorio:
     ```bash
-    git clone [https://github.com/pablomg-dev/ProyectoFinalReact25017.git](https://github.com/pablomg-dev/ProyectoFinalReact25017.git)
-    ```
+    git clone https://github.com/pablomg-dev/ProyectoFinalReact25017.git
 2.  Navega al directorio del proyecto:
     ```bash
     cd nombre-de-tu-proyecto

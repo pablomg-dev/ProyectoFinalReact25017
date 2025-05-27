@@ -3,8 +3,10 @@ import { useCart } from './CartContext';
 
 
 const Cart = () => {
+    // Se obtiene el carrito de compras
     const { cartItems } = useCart();
 
+    // Si el carrito está vacío, se muestra un mensaje
     if (cartItems.length === 0) {
         return (
             <Container className="mt-4 text-center">
@@ -14,11 +16,13 @@ const Cart = () => {
         );
     }
 
+    // Si el carrito no está vacío, se muestra el carrito
     return (
         <Container className="mt-4">
             <h2 className="mb-4">Your Cart</h2>
             <Row xs={1} md={2} lg={3} className="g-4">
                 {cartItems.map(item => (
+                    // Se muestra cada producto del carrito
                     <Col key={item.id}>
                         <Card className="h-100 shadow-sm">
                             <Card.Body>

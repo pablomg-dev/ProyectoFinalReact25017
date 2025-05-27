@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
 
-// Se crea el componente Login
+
 function Login() {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');

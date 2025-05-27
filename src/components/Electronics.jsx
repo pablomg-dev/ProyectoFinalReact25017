@@ -4,10 +4,14 @@ import ProductCard from './ProductCard'
 
 
 function Electronics({ isAuth, addToCart }) {
+    // Se utiliza useState para almacenar los productos electrónicos
     const [electronics, setElectronics] = useState([]);
+    // Se utiliza useState para almacenar el estado de carga
     const [loading, setLoading] = useState(true);
+    // Se utiliza useState para almacenar el error
     const [error, setError] = useState(null);
 
+    // Se utiliza useEffect para obtener los productos electrónicos
     useEffect(() => {
         const fetchElectronics = async () => {
             try {
@@ -31,11 +35,12 @@ function Electronics({ isAuth, addToCart }) {
         fetchElectronics();
     }, []);
 
+    // Se devuelve el componente Electronics
     return (
         <Container className="mt-4">
             <h1 className="text-center mb-4">Discover Our Electronics</h1>
             <p className="text-center mb-5">From gadgets to gear, find the latest in technology.</p>
-
+            {/* Se muestra un spinner mientras se carga el contenido */}
             {loading && (
                 <div className="d-flex justify-content-center">
                     <Spinner animation="border" role="status">
@@ -43,13 +48,14 @@ function Electronics({ isAuth, addToCart }) {
                     </Spinner>
                 </div>
             )}
-
+            {/* Se muestra un mensaje de error si ocurre un error al cargar los productos electrónicos */}
             {error && (
                 <Alert variant="danger" className="text-center">
                     Error loading electronics products: {error}
                 </Alert>
             )}
 
+            {/* Se muestra el contenido si no hay un error y no está cargando */}
             {!loading && !error && (
                 <Row xs={1} md={2} lg={3} className="g-4">
                     {electronics.map(product => (

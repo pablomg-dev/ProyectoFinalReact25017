@@ -4,11 +4,11 @@ import ProductCard from './ProductCard'
 
 
 function Electronics({ isAuth, addToCart }) {
-    // Se utiliza useState para almacenar los productos electrónicos
+    // useState para almacenar los productos electrónicos
     const [electronics, setElectronics] = useState([]);
-    // Se utiliza useState para almacenar el estado de carga
+    // useState para almacenar el estado de carga
     const [loading, setLoading] = useState(true);
-    // Se utiliza useState para almacenar el error
+    // useState para almacenar el error
     const [error, setError] = useState(null);
 
     // Se utiliza useEffect para obtener los productos electrónicos

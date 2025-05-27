@@ -18,7 +18,7 @@ Este es un proyecto de comercio electrónico desarrollado con **React**. Permite
 
 * **React**: Biblioteca de JavaScript para construir interfaces de usuario.
 * **Vite**: Herramienta de construcción rápida para el desarrollo frontend.
-* **FakeStoreAPI**: API REST simulada para obtener datos de productos.
+* **FakeStoreAPI**: API REST simulada para obtener datos de productos. [Ver FakeStoreAPI](https://fakestoreapi.com/)
 * **Bootstrap React**: Componentes de Bootstrap reconstruidos para React.
 * **React-Bootstrap Icons**: Colección de iconos para usar con React y Bootstrap.
 
@@ -31,19 +31,18 @@ Para ejecutar este proyecto localmente:
 1.  Clona el repositorio:
     ```bash
     git clone https://github.com/pablomg-dev/ProyectoFinalReact25017.git
+    ```
 2.  Navega al directorio del proyecto:
     ```bash
-    cd nombre-de-tu-proyecto
+    cd ProyectoFinalReact25017
     ```
 3.  Instala las dependencias:
     ```bash
     npm install
-    # o yarn install
     ```
 4.  Inicia la aplicación en modo desarrollo:
     ```bash
     npm run dev
-    # o yarn dev
     ```
     La aplicación se abrirá en tu navegador en `http://localhost:5173` (o un puerto similar).
 

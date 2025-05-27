@@ -8,7 +8,7 @@ function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    // Se crea la función handleLogin que se ejecuta al enviar el formulario
+    // La función handleLogin se ejecuta al enviar el formulario
     const handleLogin = (e) => {
         e.preventDefault();
 
@@ -23,7 +23,6 @@ function Login() {
     };
 
     return (
-        // Agregamos clases de flexbox al Container para centrarlo
         <Container
             className="mt-5 d-flex flex-column justify-content-center align-items-center"
             style={{ maxWidth: 400, minHeight: '80vh' }}

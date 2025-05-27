@@ -3,6 +3,7 @@ import { Facebook, Instagram } from 'react-bootstrap-icons';
 
 function Footer() {
     return (
+        // Componente Footer que muestra información de contacto y enlaces a redes sociales
         <footer className="bg-dark text-white mt-5 py-3">
             <Container className="d-flex justify-content-between align-items-center">
                 <p className="mb-0">SuperSuerteStore &copy; 2025</p>

@@ -6,15 +6,15 @@ import { CartFill } from 'react-bootstrap-icons';
 const Header = () => {
     const navigate = useNavigate();
     const isAuth = localStorage.getItem('auth') === 'true';
-
+    // Estado para manejar la expansión del menú en pantallas pequeñas
     const [expanded, setExpanded] = useState(false);
-
+    // Función para manejar el cierre de sesión
     const logOut = () => {
         localStorage.removeItem('auth');
         navigate('/login');
         setExpanded(false);
     };
-
+    // Maneja el clic en los enlaces de navegación para colapsar el menú en pantallas pequeñas
     const handleNavLinkClick = () => {
         setExpanded(false);
     };
@@ -25,7 +25,7 @@ const Header = () => {
                 <Navbar.Brand as={Link} to="/" className='fs-3 fw-bold' onClick={handleNavLinkClick}>
                     SuperSuerteStore
                 </Navbar.Brand>
-
+                {/* Botón de menú para pantallas pequeñas */}
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -47,7 +47,7 @@ const Header = () => {
                                 >
                                     Admin
                                 </Button>
-
+                                {/* Botón de Logout */}
                                 <Button
                                     variant="outline-light"
                                     onClick={logOut}
@@ -60,7 +60,7 @@ const Header = () => {
                         ) : (
                             <Nav.Link as={Link} to="/login" onClick={handleNavLinkClick} className="me-md-2 my-2 my-md-0 d-inline-flex justify-content-center align-items-center fs-5">Login</Nav.Link>
                         )}
-
+                        {/* Icono de carrito siempre visible */}
                         <Nav.Link
                             as={Link}
                             to="/cart"

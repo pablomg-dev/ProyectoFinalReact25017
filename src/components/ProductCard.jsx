@@ -16,7 +16,8 @@ const ProductCard = ({ product }) => {
             navigate('/login');
             return;
         }
-
+        // Llama a la función addToCart del contexto del carrito
+        // y muestra un mensaje de confirmación
         addToCart(product);
         alert(`"${product.title}" has been added to the cart.`);
     };
@@ -42,7 +43,7 @@ const ProductCard = ({ product }) => {
                 </Card.Text>
 
                 {/* Botón "Add to Cart" siempre visible */}
-                <Button variant="success" onClick={handleAddToCart} className="mt-auto"> {/* mt-auto para pegarlo al final */}
+                <Button variant="success" onClick={handleAddToCart} className="mt-auto">
                     Add to Cart
                 </Button>
             </Card.Body>

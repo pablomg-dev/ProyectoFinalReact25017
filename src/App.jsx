@@ -12,7 +12,9 @@ import Cart from "./components/Cart";
 
 function App() {
   return (
+    // Envuelve la aplicación en CartProvider para proveer el contexto del carrito
     <CartProvider>
+      {/* Usa BrowserRouter para habilitar el enrutamiento en la aplicación */}
       <BrowserRouter>
         <Header />
         <Routes>
@@ -21,6 +23,7 @@ function App() {
           <Route path="/electronics" element={<Electronics />} />
           <Route path="/jewelry" element={<Jewelry />} />
           <Route path="/cart" element={
+            // Usa ProtectedRoute para asegurar que solo usuarios autenticados accedan al carrito
             <ProtectedRoute>
               <Cart />
             </ProtectedRoute>

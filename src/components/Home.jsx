@@ -42,6 +42,7 @@ function Home() {
 
             <h2 className="mb-4 text-center">All Our Products</h2>
 
+            {/* Mostrar spinner de carga, mensaje de error o productos */}
             {loading && (
                 <div className="d-flex justify-content-center">
                     <Spinner animation="border" role="status">
@@ -49,13 +50,13 @@ function Home() {
                     </Spinner>
                 </div>
             )}
-
+            {/* Mostrar mensaje de error si ocurre */}
             {error && (
                 <Alert variant="danger" className="text-center">
                     Error to load products: {error}
                 </Alert>
             )}
-
+            {/* Mostrar productos si no hay errores ni carga */}
             {!loading && !error && (
                 <Row xs={1} md={2} lg={3} className="g-4">
                     {allProducts.map(product => (

@@ -4,10 +4,12 @@ import ProductCard from './ProductCard';
 
 
 function Jewelry({ isAuth, addToCart }) {
+    // Estados para productos, carga y error
     const [jewelry, setJewelry] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // Obtener productos de joyería al montar el componente
     useEffect(() => {
         const fetchJewelry = async () => {
             try {
@@ -31,6 +33,7 @@ function Jewelry({ isAuth, addToCart }) {
         fetchJewelry();
     }, []);
 
+    // Renderizar productos, carga o error
     return (
         <Container className="mt-4">
             <h1 className="text-center mb-4">Exquisite Jewelry Collection</h1>

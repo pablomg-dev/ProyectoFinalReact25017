@@ -16,7 +16,7 @@ function Login() {
             localStorage.setItem('auth', 'true');
             navigate('/admin');
         } else {
-            alert('Credenciales incorrectas. Intenta con "admin" y "admin123"');
+            alert('Incorrect credentials. Try "admin" and "admin123"');
             setUsername('');
             setPassword('');
         }

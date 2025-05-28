@@ -3,7 +3,6 @@ import { Container, Card } from 'react-bootstrap';
 
 function Admin() {
     return (
-        // Componente Admin que muestra un panel de administración para usuarios autenticados
         <Container className="mt-4">
             <h2 className="mb-4">Admin Panel</h2>
             <Card>

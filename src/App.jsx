@@ -10,6 +10,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Login from "./components/Login";
 import Admin from "./components/Admin";
 import Cart from "./components/Cart";
+import MensClothing from './components/MensClothing';
+import WomensClothing from './components/WomensClothing';
 
 function App() {
 
@@ -38,6 +40,8 @@ function App() {
                     <Admin />
                   </ProtectedRoute>
                 } />
+                <Route path="/mens-clothing" element={<MensClothing />} />
+                <Route path="/womens-clothing" element={<WomensClothing />} />
               </Routes>
             </div>
             <Footer />

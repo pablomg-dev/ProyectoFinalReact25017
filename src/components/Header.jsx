@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navbar, Nav, Container, Button } from 'react-bootstrap';
+import { Navbar, Nav, Container, Button, NavDropdown } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { CartFill } from 'react-bootstrap-icons';
 
@@ -33,6 +33,28 @@ const Header = () => {
                         <Nav.Link as={Link} to="/" onClick={handleNavLinkClick} className='me-md-2 fs-5'>Home</Nav.Link>
                         <Nav.Link as={Link} to="/electronics" onClick={handleNavLinkClick} className='me-md-2 fs-5'>Electronics</Nav.Link>
                         <Nav.Link as={Link} to="/jewelry" onClick={handleNavLinkClick} className='me-md-2 fs-5'>Jewelry</Nav.Link>
+                        
+                        {/* Reemplazar Nav.Link de Clothes por NavDropdown */}
+                        <NavDropdown 
+                            title="Clothes" 
+                            id="clothes-dropdown"
+                            className='me-md-2 fs-5'
+                        >
+                            <NavDropdown.Item 
+                                as={Link} 
+                                to="/mens-clothing"
+                                onClick={handleNavLinkClick}
+                            >
+                                Men's Clothing
+                            </NavDropdown.Item>
+                            <NavDropdown.Item 
+                                as={Link} 
+                                to="/womens-clothing"
+                                onClick={handleNavLinkClick}
+                            >
+                                Women's Clothing
+                            </NavDropdown.Item>
+                        </NavDropdown>
 
                         {/* Elementos de autenticación: Admin, Logout y Carrito (si logueado) o Login (si no logueado) */}
                         {isAuth ? (

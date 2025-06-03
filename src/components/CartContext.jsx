@@ -20,23 +20,52 @@ export const CartProvider = ({ children }) => {
             // Verificar si el producto ya existe
             const existingItem = prevItems.find(item => item.id === product.id);
             if (existingItem) {
-                return prevItems; // Si ya existe, no lo agregamos de nuevo
+                // Si existe, incrementamos la cantidad
+                return prevItems.map(item =>
+                    item.id === product.id
+                        ? { ...item, quantity: (item.quantity || 1) + 1 }
+                        : item
+                );
             }
-            // Si es un nuevo producto, lo agregamos
-            return [...prevItems, product];
+            // Si es nuevo, lo agregamos con cantidad 1
+            return [...prevItems, { ...product, quantity: 1 }];
         });
     };
 
-    // Obtener la cantidad total de items en el carrito
+    const removeFromCart = (productId) => {
+        setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
+    };
+
+    const updateQuantity = (productId, newQuantity) => {
+        if (newQuantity < 1) return;
+        setCartItems(prevItems =>
+            prevItems.map(item =>
+                item.id === productId
+                    ? { ...item, quantity: newQuantity }
+                    : item
+            )
+        );
+    };
+
     const getCartItemsCount = () => {
-        return cartItems.length;
+        return cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
+    };
+
+    // Calcula el total del carrito multiplicando precio por cantidad
+    const getCartTotal = () => {
+        return cartItems.reduce((total, item) => 
+            total + (item.price * (item.quantity || 1)), 0
+        );
     };
 
     return (
         <CartContext.Provider value={{
             cartItems,
             addToCart,
-            getCartItemsCount
+            removeFromCart,
+            updateQuantity,
+            getCartItemsCount,
+            getCartTotal
         }}>
             {children}
         </CartContext.Provider>

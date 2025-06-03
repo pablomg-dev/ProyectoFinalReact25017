@@ -1,10 +1,9 @@
-import { Container, Row, Col, Card, Image } from 'react-bootstrap';
+import { Container, Table, Button, ButtonGroup } from 'react-bootstrap';
 import { useCart } from './CartContext';
-
 
 const Cart = () => {
     // Se obtiene el carrito de compras
-    const { cartItems } = useCart();
+    const { cartItems, removeFromCart, updateQuantity, getCartTotal } = useCart();
 
     // Si el carrito está vacío, se muestra un mensaje
     if (cartItems.length === 0) {
@@ -20,31 +19,75 @@ const Cart = () => {
     return (
         <Container className="mt-4">
             <h2 className="mb-4">Your Cart</h2>
-            <Row xs={1} md={2} lg={3} className="g-4">
-                {cartItems.map(item => (
-                    // Se muestra cada producto del carrito
-                    <Col key={item.id}>
-                        <Card className="h-100 shadow-sm">
-                            <Card.Body>
-                                <div className="d-flex align-items-center mb-3">
-                                    <Image 
+            <Table responsive striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {cartItems.map(item => (
+                        // Se muestra cada producto del carrito
+                        <tr key={item.id}>
+                            <td>
+                                <div className="d-flex align-items-center">
+                                    <img 
                                         src={item.image} 
-                                        alt={item.title} 
-                                        style={{ width: '80px', height: '80px', objectFit: 'contain' }}
+                                        alt={item.title}
+                                        style={{ width: '50px', height: '50px', objectFit: 'contain' }}
                                         className="me-3"
                                     />
-                                    <div>
-                                        <Card.Title className="mb-1">{item.title}</Card.Title>
-                                        <Card.Text className="text-muted">
-                                            ${item.price}
-                                        </Card.Text>
-                                    </div>
+                                    <span>{item.title}</span>
                                 </div>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                ))}
-            </Row>
+                            </td>
+                            <td>${item.price.toFixed(2)}</td>
+                            <td>
+                                <ButtonGroup size="sm">
+                                    <Button 
+                                        variant="outline-secondary"
+                                        onClick={() => updateQuantity(item.id, (item.quantity || 1) - 1)}
+                                    >
+                                        -
+                                    </Button>
+                                    <Button variant="outline-secondary" disabled>
+                                        {item.quantity || 1}
+                                    </Button>
+                                    <Button 
+                                        variant="outline-secondary"
+                                        onClick={() => updateQuantity(item.id, (item.quantity || 1) + 1)}
+                                    >
+                                        +
+                                    </Button>
+                                </ButtonGroup>
+                            </td>
+                            <td>${((item.quantity || 1) * item.price).toFixed(2)}</td>
+                            <td>
+                                <Button 
+                                    variant="danger"
+                                    size="sm"
+                                    onClick={() => removeFromCart(item.id)}
+                                >
+                                    Remove
+                                </Button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colSpan="3" className="text-end">
+                            <strong>Cart Total:</strong>
+                        </td>
+                        <td colSpan="2">
+                            <strong>${getCartTotal().toFixed(2)}</strong>
+                        </td>
+                    </tr>
+                </tfoot>
+            </Table>
         </Container>
     );
 };

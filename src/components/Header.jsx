@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { Navbar, Nav, Container, Button, NavDropdown } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { CartFill } from 'react-bootstrap-icons';
+import { useCart } from './CartContext';
 
 const Header = () => {
     const navigate = useNavigate();
     const isAuth = localStorage.getItem('auth') === 'true';
+    const { getCartItemsCount } = useCart();
     // Estado para manejar la expansión del menú en pantallas pequeñas
     const [expanded, setExpanded] = useState(false);
     // Función para manejar el cierre de sesión
@@ -87,9 +89,15 @@ const Header = () => {
                             as={Link}
                             to="/cart"
                             onClick={handleNavLinkClick}
-                            className="my-2 my-md-0 d-inline-flex justify-content-center align-items-center"
+                            className="my-2 my-md-0 d-inline-flex justify-content-center align-items-center position-relative"
                         >
                             <CartFill size={25} />
+                            {getCartItemsCount() > 0 && (
+                                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    {getCartItemsCount()}
+                                    <span className="visually-hidden">items in cart</span>
+                                </span>
+                            )}
                         </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

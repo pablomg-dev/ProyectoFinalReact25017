@@ -21,9 +21,8 @@ const Header = () => {
         setExpanded(false);
     };
 
-    return (
-        <Navbar bg="dark" variant="dark" expand="md" expanded={expanded} onToggle={setExpanded}>
-            <Container>
+    return (        <Navbar bg="dark" variant="dark" expand="md" expanded={expanded} onToggle={setExpanded} className="w-100">
+            <Container fluid>
                 <Navbar.Brand as={Link} to="/" className='fs-3 fw-bold' onClick={handleNavLinkClick}>
                     SuperSuerteStore
                 </Navbar.Brand>
@@ -31,16 +30,15 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="ms-auto text-end flex-column flex-md-row align-items-end align-items-md-center">
-                        <Nav.Link as={Link} to="/" onClick={handleNavLinkClick} className='me-md-2 fs-5'>Home</Nav.Link>
-                        <Nav.Link as={Link} to="/electronics" onClick={handleNavLinkClick} className='me-md-2 fs-5'>Electronics</Nav.Link>
-                        <Nav.Link as={Link} to="/jewelry" onClick={handleNavLinkClick} className='me-md-2 fs-5'>Jewelry</Nav.Link>
+                    <Nav className="ms-auto text-end flex-column flex-md-row align-items-end align-items-md-center gap-md-2">                        <Nav.Link as={Link} to="/" onClick={handleNavLinkClick} className='fs-5'>Home</Nav.Link>
+                        <Nav.Link as={Link} to="/electronics" onClick={handleNavLinkClick} className='fs-5'>Electronics</Nav.Link>
+                        <Nav.Link as={Link} to="/jewelry" onClick={handleNavLinkClick} className='fs-5'>Jewelry</Nav.Link>
                         
                         {/* Reemplazar Nav.Link de Clothes por NavDropdown */}
                         <NavDropdown 
                             title="Clothes" 
                             id="clothes-dropdown"
-                            className='me-md-2 fs-5'
+                            className='fs-5'
                         >
                             <NavDropdown.Item 
                                 as={Link} 
@@ -58,28 +56,30 @@ const Header = () => {
                             </NavDropdown.Item>
                         </NavDropdown>
 
-                        {/* Elementos de autenticación: Admin, Logout y Carrito (si logueado) o Login (si no logueado) */}
-                        {isAuth ? (
+                        {/* Elementos de autenticación: Admin, Logout y Carrito (si logueado) o Login (si no logueado) */}                        {isAuth ? (
                             <>
-                                <Button
-                                    variant="outline-info"
-                                    as={Link}
-                                    to="/admin"
-                                    className="me-md-2 my-2 my-md-0 d-inline-flex justify-content-center align-items-center fs-5"
-                                    onClick={handleNavLinkClick}
-                                    size="sm"
-                                >
-                                    Admin
-                                </Button>
-                                {/* Botón de Logout */}
-                                <Button
-                                    variant="outline-light"
-                                    onClick={logOut}
-                                    size="sm"
-                                    className="me-md-2 my-2 my-md-0 d-inline-flex justify-content-center align-items-center fs-5"
-                                >
-                                    Logout
-                                </Button>
+                                <Nav.Item className="d-grid mx-1">
+                                    <Button
+                                        variant="outline-info"
+                                        as={Link}
+                                        to="/admin"
+                                        className="my-2 my-md-0 d-inline-flex justify-content-center align-items-center"
+                                        onClick={handleNavLinkClick}
+                                        size="sm"
+                                    >
+                                        Admin
+                                    </Button>
+                                </Nav.Item>
+                                <Nav.Item className="d-grid mx-1">
+                                    <Button
+                                        variant="outline-light"
+                                        onClick={logOut}
+                                        size="sm"
+                                        className="my-2 my-md-0 d-inline-flex justify-content-center align-items-center"
+                                    >
+                                        Logout
+                                    </Button>
+                                </Nav.Item>
                             </>
                         ) : (
                             <Nav.Link as={Link} to="/login" onClick={handleNavLinkClick} className="me-md-2 my-2 my-md-0 d-inline-flex justify-content-center align-items-center fs-5">Login</Nav.Link>

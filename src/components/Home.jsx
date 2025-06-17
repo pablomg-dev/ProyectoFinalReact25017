@@ -1,4 +1,3 @@
-// src/components/Home.jsx
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Spinner, Alert } from 'react-bootstrap';
 import ProductCard from './ProductCard';

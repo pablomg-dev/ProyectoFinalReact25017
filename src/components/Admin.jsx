@@ -13,8 +13,8 @@ function Admin() {
                     </Card.Text>
                     <ul className="mt-2">
                         <li>View and manage your cart</li>
-                        <li>Access exclusive content</li>
                         <li>View your profile information</li>
+                        <li>Add products to the inventory</li>
                     </ul>
                 </Card.Body>
             </Card>

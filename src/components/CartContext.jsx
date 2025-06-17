@@ -31,11 +31,11 @@ export const CartProvider = ({ children }) => {
             return [...prevItems, { ...product, quantity: 1 }];
         });
     };
-
+    // Eliminar un producto del carrito
     const removeFromCart = (productId) => {
         setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
     };
-
+    // Actualizar la cantidad de un producto en el carrito
     const updateQuantity = (productId, newQuantity) => {
         if (newQuantity < 1) return;
         setCartItems(prevItems =>
@@ -46,7 +46,7 @@ export const CartProvider = ({ children }) => {
             )
         );
     };
-
+    // Calcula el número total de artículos en el carrito
     const getCartItemsCount = () => {
         return cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
     };
@@ -57,7 +57,8 @@ export const CartProvider = ({ children }) => {
             total + (item.price * (item.quantity || 1)), 0
         );
     };
-
+    
+    // Proporciona el contexto del carrito a los componentes hijos
     return (
         <CartContext.Provider value={{
             cartItems,

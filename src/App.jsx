@@ -13,10 +13,11 @@ import Cart from "./components/Cart";
 import MensClothing from './components/MensClothing';
 import WomensClothing from './components/WomensClothing';
 
+
 function App() {
 
   return (
-    // Envuelve la aplicación con AuthProvider y CartProvider para manejar autenticación y carrito de compras
+    // Envuelve la aplicación con AuthProvider y CartProvider para manejar autenticación y el carrito de compras
     <AuthProvider>
       <CartProvider>
         <div className="d-flex flex-column min-vh-100">

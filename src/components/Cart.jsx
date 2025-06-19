@@ -1,31 +1,47 @@
-import { Container, Table, Button, ButtonGroup } from 'react-bootstrap';
+import { Container, Table, Button, ButtonGroup, Modal } from 'react-bootstrap';
+import { useState } from 'react';
 import { useCart } from './CartContext';
 
 const Cart = () => {
-    // Se obtiene el carrito de compras
     const { cartItems, removeFromCart, updateQuantity, getCartTotal } = useCart();
+    const [showModal, setShowModal] = useState(false);
+    const [selectedItem, setSelectedItem] = useState(null);
+
+    const handleRemoveClick = (item) => {
+        setSelectedItem(item);
+        setShowModal(true);
+    };
+
+    const confirmRemove = () => {
+        if (selectedItem) {
+            removeFromCart(selectedItem.id);
+        }
+        setShowModal(false);
+        setSelectedItem(null);
+    };
 
     // Si el carrito está vacío, se muestra un mensaje
     if (cartItems.length === 0) {
         return (
             <Container className="mt-4 text-center">
                 <h2>Your cart is empty</h2>
-                <p>Add some products to start!</p>
+                <p>Add some products to start shopping!</p>
             </Container>
         );
     }
 
     // Si el carrito no está vacío, se muestra el carrito
     return (
+        <>
         <Container className="mt-4">
-            <h2 className="mb-4">Your Cart</h2>
+            <h2 className="mb-4">Shopping Cart</h2>
             <Table responsive striped bordered hover>
                 <thead>
                     <tr>
                         <th>Product</th>
-                        <th>Price</th>
+                        <th>Unit Price</th>
                         <th>Quantity</th>
-                        <th>Total</th>
+                        <th>Subtotal</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -69,7 +85,7 @@ const Cart = () => {
                                 <Button 
                                     variant="danger"
                                     size="sm"
-                                    onClick={() => removeFromCart(item.id)}
+                                    onClick={() => handleRemoveClick(item)}
                                 >
                                     Remove
                                 </Button>
@@ -80,7 +96,7 @@ const Cart = () => {
                 <tfoot>
                     <tr>
                         <td colSpan="3" className="text-end">
-                            <strong>Cart Total:</strong>
+                            <strong>Total:</strong>
                         </td>
                         <td colSpan="2">
                             <strong>${getCartTotal().toFixed(2)}</strong>
@@ -89,6 +105,28 @@ const Cart = () => {
                 </tfoot>
             </Table>
         </Container>
+        {/* Modal de confirmación para eliminar del carrito */}
+        <Modal show={showModal} onHide={() => setShowModal(false)}>
+            <Modal.Header closeButton>
+                <Modal.Title>Remove Product</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                {selectedItem && (
+                    <>
+                        Are you sure you want to remove <strong>{selectedItem.title}</strong> from your shopping cart?
+                    </>
+                )}
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={() => setShowModal(false)}>
+                    Cancel
+                </Button>
+                <Button variant="danger" onClick={confirmRemove}>
+                    Remove
+                </Button>
+            </Modal.Footer>
+        </Modal>
+        </>
     );
 };
 

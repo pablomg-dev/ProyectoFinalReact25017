@@ -1,28 +1,44 @@
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Modal } from 'react-bootstrap';
 import { useCart } from './CartContext';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 // Recibe 'product' como prop
 const ProductCard = ({ product }) => {
     const { addToCart } = useCart();
     const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
+    const [modalContent, setModalContent] = useState({ title: '', message: '', action: null });
 
     // Función para manejar el clic en "Add to Cart"
     const handleAddToCart = () => {
         const isAuth = localStorage.getItem('auth') === 'true';
         
         if (!isAuth) {
-            alert('You must be logged in to add products to your cart.');
-            navigate('/login');
+            setModalContent({
+                title: 'Login Required',
+                message: 'You must be logged in to add products to your cart.',
+                action: () => {
+                    setShowModal(false);
+                    navigate('/login');
+                }
+            });
+            setShowModal(true);
             return;
         }
         // Llama a la función addToCart del contexto del carrito
         // y muestra un mensaje de confirmación
         addToCart(product);
-        alert(`"${product.title}" has been added to the cart.`);
+        setModalContent({
+            title: 'Added to Cart',
+            message: `"${product.title}" has been added to the cart.`,
+            action: () => setShowModal(false)
+        });
+        setShowModal(true);
     };
 
     return (
+        <>
         <Card className="h-100 shadow-sm">
             <Card.Img
                 variant="top"
@@ -48,7 +64,25 @@ const ProductCard = ({ product }) => {
                 </Button>
             </Card.Body>
         </Card>
+        {/* Modal personalizado */}
+        <Modal show={showModal} onHide={() => setShowModal(false)}>
+            <Modal.Header closeButton>
+                <Modal.Title>{modalContent.title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>{modalContent.message}</Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={() => setShowModal(false)}>
+                    Close
+                </Button>
+                {modalContent.title === 'Login Required' && (
+                    <Button variant="primary" onClick={modalContent.action}>
+                        Go to Login
+                    </Button>
+                )}
+            </Modal.Footer>
+        </Modal>
+        </>
     );
-};
+}
 
 export default ProductCard;

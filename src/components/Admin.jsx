@@ -17,7 +17,7 @@ function Admin() {
     const [isLoading, setIsLoading] = useState(false);
     const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
 
-    const API_URL = 'https://6851d5c78612b47a2c0b6129.mockapi.io/products';
+    const API_URL = 'https://6851d5c78612b47a2c0b6129.mockapi.io/api/v1/products';
 
     useEffect(() => {
         loadProducts();
@@ -26,13 +26,13 @@ function Admin() {
     const loadProducts = async () => {
         try {
             const response = await fetch(API_URL);
-            if (!response.ok) throw new Error('Error al cargar productos');
+                if (!response.ok) throw new Error('Error loading products');
             const data = await response.json();
             setProducts(data);
         } catch (error) {
             setSubmitStatus({
                 type: 'danger',
-                message: 'Error al cargar los productos: ' + error.message
+                message: 'Error loading products: ' + error.message
             });
         }
     };
@@ -41,21 +41,21 @@ function Admin() {
         const newErrors = {};
 
         if (!formData.name.trim()) {
-            newErrors.name = 'El nombre es obligatorio';
+            newErrors.name = 'Name is required';
         } else if (formData.name.length < 3 || formData.name.length > 50) {
-            newErrors.name = 'El nombre debe tener entre 3 y 50 caracteres';
+            newErrors.name = 'Name must be between 3 and 50 characters';
         }
 
         if (!formData.price) {
-            newErrors.price = 'El precio es obligatorio';
+            newErrors.price = 'Price is required';
         } else if (isNaN(formData.price) || Number(formData.price) < 0) {
-            newErrors.price = 'El precio debe ser un número mayor o igual a 0';
+            newErrors.price = 'Price must be a number greater than or equal to 0';
         }
 
         if (!formData.description.trim()) {
-            newErrors.description = 'La descripción es obligatoria';
+            newErrors.description = 'Description is required';
         } else if (formData.description.length < 10) {
-            newErrors.description = 'La descripción debe tener al menos 10 caracteres';
+            newErrors.description = 'Description must be at least 10 characters';
         }
 
         setErrors(newErrors);
@@ -70,8 +70,8 @@ function Admin() {
 
         try {
             const url = editMode 
-                ? `${API_URL}/${formData.id}`  // URL para actualizar incluye el ID
-                : API_URL;                      // URL para crear nuevo producto
+                ? `${API_URL}/${formData.id}`
+                : API_URL;
 
             const response = await fetch(url, {
                 method: editMode ? 'PUT' : 'POST',
@@ -85,12 +85,12 @@ function Admin() {
             });
 
             if (!response.ok) {
-                throw new Error('Error al ' + (editMode ? 'editar' : 'crear') + ' el producto');
+                throw new Error('Error ' + (editMode ? 'editing' : 'creating') + ' the product');
             }
 
             setSubmitStatus({
                 type: 'success',
-                message: '¡Producto ' + (editMode ? 'editado' : 'agregado') + ' exitosamente!'
+                message: 'Product ' + (editMode ? 'updated' : 'added') + ' successfully!'
             });
             setFormData({ name: '', price: '', description: '' });
             setEditMode(false);
@@ -98,7 +98,7 @@ function Admin() {
         } catch (error) {
             setSubmitStatus({
                 type: 'danger',
-                message: 'Error al conectar con el servidor: ' + error.message
+                message: 'Error connecting to the server: ' + error.message
             });
         } finally {
             setIsLoading(false);
@@ -141,17 +141,17 @@ function Admin() {
                 method: 'DELETE'
             });
 
-            if (!response.ok) throw new Error('Error al eliminar el producto');
+            if (!response.ok) throw new Error('Error deleting the product');
 
             await loadProducts();
             setSubmitStatus({
                 type: 'success',
-                message: 'Producto eliminado exitosamente'
+                message: 'Product deleted successfully'
             });
         } catch (error) {
             setSubmitStatus({
                 type: 'danger',
-                message: 'Error al eliminar el producto: ' + error.message
+                message: 'Error deleting the product: ' + error.message
             });
         } finally {
             setShowDeleteModal(false);
@@ -171,7 +171,7 @@ function Admin() {
 
     return (
         <Container className="mt-4">
-            <h2 className="mb-4">Panel de Administración</h2>
+            <h2 className="mb-4">Admin Panel</h2>
             
             {submitStatus.message && (
                 <Alert variant={submitStatus.type} className="mb-4">
@@ -181,10 +181,10 @@ function Admin() {
 
             <Card className="mb-4">
                 <Card.Body>
-                    <Card.Title className="mb-4">Agregar / Editar Producto</Card.Title>
+                    <Card.Title className="mb-4">Add / Edit Product</Card.Title>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3">
-                            <Form.Label>Nombre del producto</Form.Label>
+                            <Form.Label>Product Name</Form.Label>
                             <Form.Control
                                 type="text"
                                 name="name"
@@ -198,7 +198,7 @@ function Admin() {
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                            <Form.Label>Precio</Form.Label>
+                            <Form.Label>Price</Form.Label>
                             <Form.Control
                                 type="number"
                                 name="price"
@@ -213,7 +213,7 @@ function Admin() {
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                            <Form.Label>Descripción</Form.Label>
+                            <Form.Label>Description</Form.Label>
                             <Form.Control
                                 as="textarea"
                                 name="description"
@@ -226,29 +226,38 @@ function Admin() {
                                 {errors.description}
                             </Form.Control.Feedback>
                         </Form.Group>
-
-                        <Button 
-                            variant="primary" 
-                            type="submit" 
-                            disabled={isLoading}
-                        >
-                            {isLoading ? 'Guardando...' : (editMode ? 'Actualizar Producto' : 'Agregar Producto')}
-                        </Button>
+                        <div className="d-flex gap-2">
+                            <Button 
+                                variant="primary" 
+                                type="submit" 
+                                disabled={isLoading}
+                            >
+                                {isLoading ? 'Saving...' : (editMode ? 'Update Product' : 'Add Product')}
+                            </Button>
+                            <Button 
+                                variant="secondary" 
+                                type="button"
+                                onClick={resetForm}
+                                disabled={isLoading}
+                            >
+                                Cancel
+                            </Button>
+                        </div>
                     </Form>
                 </Card.Body>
             </Card>
 
             <Card>
                 <Card.Body>
-                    <Card.Title>Productos</Card.Title>
+                    <Card.Title>Products</Card.Title>
                     <Table striped bordered hover responsive>
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Precio</th>
-                                <th>Descripción</th>
-                                <th>Acciones</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Description</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -265,14 +274,14 @@ function Admin() {
                                             onClick={() => handleEdit(product)}
                                             className="me-2"
                                         >
-                                            Editar
+                                            Edit
                                         </Button>
                                         <Button 
                                             variant="danger" 
                                             size="sm" 
                                             onClick={() => handleDelete(product)}
                                         >
-                                            Eliminar
+                                            Delete
                                         </Button>
                                     </td>
                                 </tr>
@@ -284,17 +293,19 @@ function Admin() {
 
             <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Confirmar Eliminación</Modal.Title>
+                    <Modal.Title>Delete Product</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    ¿Estás seguro de que deseas eliminar el producto <strong>{selectedProduct?.name}</strong>? Esta acción no se puede deshacer.
+                    {selectedProduct && (
+                        <>Are you sure you want to delete <strong>{selectedProduct.name}</strong>? This action cannot be undone.</>
+                    )}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
-                        Cancelar
+                        Cancel
                     </Button>
                     <Button variant="danger" onClick={confirmDelete}>
-                        Eliminar
+                        Delete
                     </Button>
                 </Modal.Footer>
             </Modal>

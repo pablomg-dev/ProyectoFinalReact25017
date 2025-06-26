@@ -26,30 +26,34 @@ function MensClothing() {
         fetchProducts();
     }, []);
 
-    if (loading) return (
-        <Container className="text-center mt-5">
-            <Spinner animation="border" role="status">
-                <span className="visually-hidden">Loading...</span>
-            </Spinner>
-        </Container>
-    );
-
-    if (error) return (
-        <Alert variant="danger" className="mt-3">
-            Error: {error}
-        </Alert>
-    );
-
     return (
         <Container className="mt-4">
-            <h2 className="text-center mb-4">Men's Clothing</h2>
-            <Row xs={1} md={2} lg={3} className="g-4">
-                {products.map(product => (
-                    <Col key={product.id}>
-                        <ProductCard product={product} />
-                    </Col>
-                ))}
-            </Row>
+            <h2 className="text-center mb-2">Men's Clothing</h2>
+            <p className="text-center text-muted mb-4">Discover the best deals in men's fashion and style.</p>
+
+            {loading && (
+                <div className="d-flex justify-content-center">
+                    <Spinner animation="border" role="status">
+                        <span className="visually-hidden">Loading men's clothing...</span>
+                    </Spinner>
+                </div>
+            )}
+
+            {error && (
+                <Alert variant="danger" className="text-center">
+                    Error loading men's clothing products: {error}
+                </Alert>
+            )}
+
+            {!loading && !error && (
+                <Row xs={1} md={2} lg={3} className="g-4">
+                    {products.map(product => (
+                        <Col key={product.id}>
+                            <ProductCard product={product} />
+                        </Col>
+                    ))}
+                </Row>
+            )}
         </Container>
     );
 }

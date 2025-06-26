@@ -1,10 +1,11 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 import { useState } from 'react';
 
 
 function Login() {
     const navigate = useNavigate();
+    const location = useLocation();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(''); // Estado para el mensaje de error
@@ -16,7 +17,9 @@ function Login() {
         if (username === 'admin' && password === 'admin123') {
             localStorage.setItem('auth', 'true');
             setError('');
-            navigate('/admin');
+            // Redirigir a la ruta previa si existe, si no a /admin
+            const from = location.state?.from || '/admin';
+            navigate(from);
         } else {
             setError('Incorrect credentials. Try "admin" and "admin123".');
             setUsername('');

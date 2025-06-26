@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Spinner, Alert } from 'react-bootstrap';
+import { Helmet } from 'react-helmet-async';
 import ProductCard from './ProductCard';
 
 function Home() {
@@ -36,6 +37,10 @@ function Home() {
 
     return (
         <Container className="mt-4">
+            <Helmet>
+                <title>SuperSuerteStore | Home</title>
+                <meta name="description" content="Find the best offers on electronics, clothing, jewelry and more at SuperSuerteStore." />
+            </Helmet>
             <h1 className="text-center mb-4">Welcome to SuperSuerteStore</h1>
             <p className="text-center mb-5">Where you can find the best offers if you're lucky...</p>
 

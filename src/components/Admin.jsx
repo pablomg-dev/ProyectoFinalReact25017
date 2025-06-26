@@ -1,5 +1,6 @@
-import { Container, Card, Form, Button, Alert, Table, Modal } from 'react-bootstrap';
+import { Container, Card, Form, Button, Table, Modal } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 
 function Admin() {
@@ -92,6 +93,7 @@ function Admin() {
                 type: 'success',
                 message: 'Product ' + (editMode ? 'updated' : 'added') + ' successfully!'
             });
+            toast.success(`Product ${editMode ? 'updated' : 'added'} successfully!`);
             setFormData({ name: '', price: '', description: '' });
             setEditMode(false);
             loadProducts();
@@ -100,6 +102,7 @@ function Admin() {
                 type: 'danger',
                 message: 'Error connecting to the server: ' + error.message
             });
+            toast.error('Error connecting to the server.');
         } finally {
             setIsLoading(false);
         }
@@ -148,11 +151,13 @@ function Admin() {
                 type: 'success',
                 message: 'Product deleted successfully'
             });
+            toast.info('Product deleted successfully');
         } catch (error) {
             setSubmitStatus({
                 type: 'danger',
                 message: 'Error deleting the product: ' + error.message
             });
+            toast.error('Error deleting the product.');
         } finally {
             setShowDeleteModal(false);
             setSelectedProduct(null);
@@ -172,12 +177,6 @@ function Admin() {
     return (
         <Container className="mt-4">
             <h2 className="mb-4">Admin Panel</h2>
-            
-            {submitStatus.message && (
-                <Alert variant={submitStatus.type} className="mb-4">
-                    {submitStatus.message}
-                </Alert>
-            )}
 
             <Card className="mb-4">
                 <Card.Body>

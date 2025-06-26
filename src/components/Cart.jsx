@@ -1,11 +1,40 @@
-import { Container, Table, Button, ButtonGroup, Modal } from 'react-bootstrap';
-import { useState } from 'react';
+import { Container, Table, Button, ButtonGroup, Modal, Spinner } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
 import { useCart } from './CartContext';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Cart = () => {
     const { cartItems, removeFromCart, updateQuantity, getCartTotal } = useCart();
     const [showModal, setShowModal] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // Si el usuario no está autenticado, redirigir a login
+        const isAuth = localStorage.getItem('auth') === 'true';
+        if (!isAuth) {
+            navigate('/login', { state: { from: '/cart' } });
+        } else {
+            // Mostrar spinner de carga breve al volver del login
+            setLoading(true);
+            const timer = setTimeout(() => setLoading(false), 700);
+            return () => clearTimeout(timer);
+        }
+    }, [navigate]);
+
+    // Mostrar spinner de carga si loading es true
+    if (loading) {
+        return (
+            <Container className="mt-5 d-flex flex-column align-items-center justify-content-center">
+                <Spinner animation="border" role="status">
+                    <span className="visually-hidden">Loading cart...</span>
+                </Spinner>
+                <p className="mt-3">Loading your cart...</p>
+            </Container>
+        );
+    }
 
     const handleRemoveClick = (item) => {
         setSelectedItem(item);
@@ -15,6 +44,7 @@ const Cart = () => {
     const confirmRemove = () => {
         if (selectedItem) {
             removeFromCart(selectedItem.id);
+            toast.info(`"${selectedItem.title}" removed from cart.`);
         }
         setShowModal(false);
         setSelectedItem(null);

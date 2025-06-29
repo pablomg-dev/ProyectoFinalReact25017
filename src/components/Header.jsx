@@ -21,20 +21,19 @@ const Header = () => {
         setExpanded(false);
     };
 
-    return (        <Navbar bg="dark" variant="dark" expand="md" expanded={expanded} onToggle={setExpanded} className="w-100">
+    return (
+        <Navbar bg="dark" variant="dark" expand="md" expanded={expanded} onToggle={setExpanded} className="w-100">
             <Container fluid>
                 <Navbar.Brand as={Link} to="/" className='fs-3 fw-bold' onClick={handleNavLinkClick}>
                     SuperSuerteStore
                 </Navbar.Brand>
-                {/* Botón de menú para pantallas pequeñas */}
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="ms-auto text-end flex-column flex-md-row align-items-end align-items-md-center gap-md-2">                        <Nav.Link as={Link} to="/" onClick={handleNavLinkClick} className='fs-5'>Home</Nav.Link>
+                    <Nav className="ms-auto text-end flex-column flex-md-row align-items-end align-items-md-center gap-md-2">
+                        <Nav.Link as={Link} to="/" onClick={handleNavLinkClick} className='fs-5'>Home</Nav.Link>
                         <Nav.Link as={Link} to="/electronics" onClick={handleNavLinkClick} className='fs-5'>Electronics</Nav.Link>
                         <Nav.Link as={Link} to="/jewelry" onClick={handleNavLinkClick} className='fs-5'>Jewelry</Nav.Link>
-                        
-                        {/* Reemplazar Nav.Link de Clothes por NavDropdown */}
                         <NavDropdown 
                             title="Clothes" 
                             id="clothes-dropdown"
@@ -55,8 +54,7 @@ const Header = () => {
                                 Women's Clothing
                             </NavDropdown.Item>
                         </NavDropdown>
-
-                        {/* Elementos de autenticación: Admin, Logout y Carrito (si logueado) o Login (si no logueado) */}                        {isAuth ? (
+                        {isAuth ? (
                             <>
                                 <Nav.Item className="d-grid mx-1">
                                     <Button
@@ -84,20 +82,23 @@ const Header = () => {
                         ) : (
                             <Nav.Link as={Link} to="/login" onClick={handleNavLinkClick} className="me-md-2 my-2 my-md-0 d-inline-flex justify-content-center align-items-center fs-5">Login</Nav.Link>
                         )}
-                        {/* Icono de carrito siempre visible */}
+                        {/* Icono de carrito siempre visible, al final y con z-index para el badge */}
                         <Nav.Link
                             as={Link}
                             to="/cart"
                             onClick={handleNavLinkClick}
                             className="my-2 my-md-0 d-inline-flex justify-content-center align-items-center position-relative"
+                            style={{ minWidth: 40, zIndex: 2 }}
                         >
-                            <CartFill size={25} />
-                            {getCartItemsCount() > 0 && (
-                                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    {getCartItemsCount()}
-                                    <span className="visually-hidden">items in cart</span>
-                                </span>
-                            )}
+                            <span style={{position: 'relative', display: 'inline-block'}}>
+                                <CartFill size={25} />
+                                {getCartItemsCount() > 0 && (
+                                    <span style={{position: 'absolute', top: -8, right: -8, zIndex: 3}} className="badge rounded-pill bg-danger">
+                                        {getCartItemsCount()}
+                                        <span className="visually-hidden">items in cart</span>
+                                    </span>
+                                )}
+                            </span>
                         </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

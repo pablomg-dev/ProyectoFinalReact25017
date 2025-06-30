@@ -13,6 +13,9 @@ Este es un proyecto de tienda online desarrollado para el curso de React de Tale
 - Diseño responsivo con **React-Bootstrap**
 - Iconos modernos con **React-Bootstrap Icons**
 - Modales de confirmación para acciones importantes
+- Feedback visual con **react-toastify**
+- SEO con **react-helmet-async**
+- Estilos personalizados con **styled-components**
 
 ---
 
@@ -23,6 +26,9 @@ Este es un proyecto de tienda online desarrollado para el curso de React de Tale
 - **React-Bootstrap**: Componentes Bootstrap para React
 - **React-Bootstrap Icons**: Iconos SVG para React
 - **React Router DOM**: Navegación entre páginas
+- **styled-components**: CSS-in-JS para estilos personalizados
+- **react-toastify**: Notificaciones y feedback visual
+- **react-helmet-async**: SEO y gestión de metadatos
 - **FakeStoreAPI**: API REST simulada para productos generales ([ver FakeStoreAPI](https://fakestoreapi.com/))
 - **MockAPI**: API REST ficticia para gestión de productos administrados ([ver MockAPI](https://mockapi.io/))
 

@@ -3,6 +3,43 @@ import { Navbar, Nav, Container, Button, NavDropdown } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { CartFill } from 'react-bootstrap-icons';
 import { useCart } from './CartContext';
+import styled from 'styled-components';
+
+const AdminButton = styled.button`
+  background: none;
+  color: #17a2b8;
+  border: 1px solid #17a2b8;
+  border-radius: 4px;
+  padding: 6px 16px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  text-decoration: none;
+  &:hover {
+    background: #17a2b8;
+    color: #fff;
+    text-decoration: none;
+  }
+`;
+
+const LogoutButton = styled.button`
+  background: none;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  padding: 6px 16px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  text-decoration: none;
+  &:hover {
+    background: #fff;
+    color: #212529;
+    text-decoration: none;
+  }
+`;
 
 const Header = () => {
     const navigate = useNavigate();
@@ -57,26 +94,22 @@ const Header = () => {
                         {isAuth ? (
                             <>
                                 <Nav.Item className="d-grid mx-1">
-                                    <Button
-                                        variant="outline-info"
+                                    <AdminButton
                                         as={Link}
                                         to="/admin"
                                         className="my-2 my-md-0 d-inline-flex justify-content-center align-items-center"
                                         onClick={handleNavLinkClick}
-                                        size="sm"
                                     >
                                         Admin
-                                    </Button>
+                                    </AdminButton>
                                 </Nav.Item>
                                 <Nav.Item className="d-grid mx-1">
-                                    <Button
-                                        variant="outline-light"
+                                    <LogoutButton
                                         onClick={logOut}
-                                        size="sm"
                                         className="my-2 my-md-0 d-inline-flex justify-content-center align-items-center"
                                     >
                                         Logout
-                                    </Button>
+                                    </LogoutButton>
                                 </Nav.Item>
                             </>
                         ) : (

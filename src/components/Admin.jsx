@@ -8,7 +8,8 @@ function Admin() {
         id: null,
         name: '',
         price: '',
-        description: ''
+        description: '',
+        image: ''
     });
     const [products, setProducts] = useState([]);
     const [editMode, setEditMode] = useState(false);
@@ -70,6 +71,11 @@ function Admin() {
         setSubmitStatus({ type: '', message: '' });
 
         try {
+            // Usa Lorem Picsum si el campo de imagen está vacío
+            const imageUrl = formData.image && formData.image.trim() !== ''
+                ? formData.image
+                : `https://picsum.photos/seed/${Date.now()}/400/400`;
+
             const url = editMode 
                 ? `${API_URL}/${formData.id}`
                 : API_URL;
@@ -81,6 +87,7 @@ function Admin() {
                 },
                 body: JSON.stringify({
                     ...formData,
+                    image: imageUrl,
                     price: Number(formData.price)
                 })
             });
@@ -94,7 +101,7 @@ function Admin() {
                 message: 'Product ' + (editMode ? 'updated' : 'added') + ' successfully!'
             });
             toast.success(`Product ${editMode ? 'updated' : 'added'} successfully!`);
-            setFormData({ name: '', price: '', description: '' });
+            setFormData({ id: null, name: '', price: '', description: '', image: '' });
             setEditMode(false);
             loadProducts();
         } catch (error) {
@@ -128,7 +135,8 @@ function Admin() {
             id: product.id,
             name: product.name,
             price: product.price.toString(),
-            description: product.description
+            description: product.description,
+            image: product.image || ''
         });
         setEditMode(true);
     };
@@ -165,19 +173,13 @@ function Admin() {
     };
 
     const resetForm = () => {
-        setFormData({
-            id: null,
-            name: '',
-            price: '',
-            description: ''
-        });
+        setFormData({ id: null, name: '', price: '', description: '', image: '' });
         setEditMode(false);
     };
 
     return (
         <Container className="mt-4">
             <h2 className="mb-4">Admin Panel</h2>
-
             <Card className="mb-4">
                 <Card.Body>
                     <Card.Title className="mb-4">Add / Edit Product</Card.Title>
@@ -195,7 +197,6 @@ function Admin() {
                                 {errors.name}
                             </Form.Control.Feedback>
                         </Form.Group>
-
                         <Form.Group className="mb-3">
                             <Form.Label>Price</Form.Label>
                             <Form.Control
@@ -210,7 +211,6 @@ function Admin() {
                                 {errors.price}
                             </Form.Control.Feedback>
                         </Form.Group>
-
                         <Form.Group className="mb-3">
                             <Form.Label>Description</Form.Label>
                             <Form.Control
@@ -224,6 +224,30 @@ function Admin() {
                             <Form.Control.Feedback type="invalid">
                                 {errors.description}
                             </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Image URL</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="image"
+                                value={formData.image}
+                                onChange={handleChange}
+                                placeholder="Leave empty for random Picsum image"
+                                isInvalid={!!errors.image}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.image}
+                            </Form.Control.Feedback>
+                            {formData.image && (
+                                <div className="mt-2">
+                                    <img
+                                        src={formData.image}
+                                        alt="Preview"
+                                        style={{maxWidth: 120, maxHeight: 120, borderRadius: 8, border: '1px solid #ccc'}}
+                                        onError={e => { e.target.onerror = null; e.target.src = "https://picsum.photos/seed/placeholder/120/120"; }}
+                                    />
+                                </div>
+                            )}
                         </Form.Group>
                         <div className="d-flex gap-2">
                             <Button 
@@ -253,6 +277,7 @@ function Admin() {
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Image</th>
                                 <th>Name</th>
                                 <th>Price</th>
                                 <th>Description</th>
@@ -263,6 +288,14 @@ function Admin() {
                             {products.map(product => (
                                 <tr key={product.id}>
                                     <td>{product.id}</td>
+                                    <td>
+                                        <img
+                                            src={product.image || "https://picsum.photos/seed/placeholder/60/60"}
+                                            alt={product.name}
+                                            style={{maxWidth: 60, maxHeight: 60, borderRadius: 6, border: '1px solid #ccc'}}
+                                            onError={e => { e.target.onerror = null; e.target.src = "https://picsum.photos/seed/placeholder/60/60"; }}
+                                        />
+                                    </td>
                                     <td>{product.name}</td>
                                     <td>${product.price.toFixed(2)}</td>
                                     <td>{product.description}</td>

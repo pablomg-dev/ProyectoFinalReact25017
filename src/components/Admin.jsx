@@ -17,7 +17,7 @@ function Admin() {
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [errors, setErrors] = useState({});
     const [isLoading, setIsLoading] = useState(false);
-    const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
+    const [, setSubmitStatus] = useState({ type: '', message: '' });
 
     const API_URL = 'https://6851d5c78612b47a2c0b6129.mockapi.io/api/v1/products';
 

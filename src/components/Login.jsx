@@ -41,8 +41,10 @@ function Login() {
             )}
             <Form onSubmit={handleLogin} className="w-100">
                 <Form.Group className="mb-3">
-                    <Form.Label>User</Form.Label>
+                    <Form.Label htmlFor="login-username">User</Form.Label>
                     <Form.Control
+                        id="login-username"
+                        name="username"
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
@@ -50,8 +52,10 @@ function Login() {
                     />
                 </Form.Group>
                 <Form.Group className="mb-3">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label htmlFor="login-password">Password</Form.Label>
                     <Form.Control
+                        id="login-password"
+                        name="password"
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}

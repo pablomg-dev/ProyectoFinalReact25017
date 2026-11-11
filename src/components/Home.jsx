@@ -74,8 +74,11 @@ function Home() {
             <Form onSubmit={handleSearch} className="mb-4">
                 <InputGroup>
                     <Form.Control
+                        id="product-search"
+                        name="search"
                         type="text"
                         placeholder="Search products..."
+                        aria-label="Search products"
                         value={search}
                         onChange={e => setSearch(e.target.value)}
                     />
